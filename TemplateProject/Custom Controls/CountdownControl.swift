@@ -13,16 +13,13 @@ protocol CountdownControlProtocol {
 }
 
 
-
 class CountdownControl: UIView {
     
-    var delegate: CountdownControlProtocol?
+    var myDelegate: CountdownControlProtocol?
     
     var img1: UIImageView!
     var img2: UIImageView!
     var img3: UIImageView!
-    
-    
     
     
     override init(frame: CGRect) {
@@ -66,7 +63,9 @@ class CountdownControl: UIView {
                 }, completion: {_ in
                     UIView.animate(withDuration: 1, delay: 0.0, options: .curveEaseOut, animations: {
                         self.img1.alpha = 0.0
-                    }, completion: {_ in})
+                    }, completion: {_ in
+                        self.myDelegate?.countdownDidEnd()
+                    })
                 })
             })
         })

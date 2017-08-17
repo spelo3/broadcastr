@@ -8,45 +8,90 @@
 
 import UIKit
 
-
-
-class RegisterScene: UIController, CountdownControlProtocol {
-    
-    var countdownControl: CountdownControl!
-    var hamburger: UIButton!
-    var infoButton: UIButton!
-    var countdownButton: UIButton!
-    var profilePicture: UIImageView!
-    var clouds: UIImageView!
-    
+class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate, CameraControlDelegate {
+    var countdownButton: UIButton? = nil
+    var countdownImages: Array<String> = ["3.png", "2.png", "1.png"]
+    var countdownCtrl: SuccessionOfImagesControl? = nil
+    var acceptCtrl: FancyBoolControl? = nil
+    var cameraCtrl: CameraControl?
+    var avatarControl: CircleAvatarControl?
     
     override func viewDidLoad() {
-        
-        setBackgroundImage("Background.png")
-        clouds = addStaticImage("Combined Shape-lg.png", xPos: 0, yPos: 534, width: 414, height: 202)
-        hamburger = addButton(#selector(UIController.buttonTap), buttonImage: "Menue-icon.png", xPos: 23, yPos: 23, width: 22, height: 22)
-        infoButton = addButton(#selector(UIController.buttonTap), buttonImage: "info-icon.png", xPos: 369, yPos: 23, width: 22, height: 22)
-        countdownButton = addButton(#selector(RegisterScene.countdownButtonPressed), buttonImage: "CountDown-button.png", xPos: 92, yPos: 479, width: 230, height: 50)
-        profilePicture = addStaticImage("Camera-img1.png", xPos: 70, yPos: 128, width: 275, height: 275)
-        
-        countdownControl = CountdownControl(frame: CGRect(x: 165, y: 448, width: 84, height: 197));
-        countdownControl.delegate = self
-        
+        super.viewDidLoad()
+        self.addBackgroundImage()
+        countdownButton = addCountdownButton(frame: CGRect(x: (view.frame.width / 2) - 115, y: view.frame.height * 0.6, width: 230, height: 50))
+        countdownCtrl = SuccessionOfImagesControl(frame: CGRect(x: (view.frame.width / 2) - 50, y: view.frame.height * 0.6, width: 100, height: 150), imagesArray: self.countdownImages)
+        countdownCtrl?.delagate = self
+        view.addSubview(countdownCtrl!)
+        self.acceptCtrl = FancyBoolControl(point: CGPoint(x: (view.frame.width / 2) - 100, y: view.frame.height * 0.6))
+        acceptCtrl?.isHidden = true
+        acceptCtrl?.delegate = self
+        view.addSubview(acceptCtrl!)
+        self.cameraCtrl = CameraControl(frame: CGRect(x: centerWidth(width: 300), y: -300, width: 300, height: 300))
+        self.cameraCtrl?.delegate = self
+        view.addSubview(cameraCtrl!)
+        self.avatarControl = CircleAvatarControl(frame: CGRect(x: self.centerWidth(width: 300), y: self.view.frame.height * 0.1, width: 300, height: 300))
+        self.avatarControl?.isHidden = true
+        view.addSubview(self.avatarControl!)
     }
     
-    func countdownButtonPressed() {
-        countdownButton.isHidden = true
-        view.addSubview(countdownControl)
-        countdownControl.beginCountdown()
-        
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
-    func countdownDidEnd() {
-        print("pressed")
+    func addCountdownButton(frame: CGRect) -> UIButton {
+        let button = addButton(title: "Start Countdown", image: "count-down-button-bg", #selector(RegisterScene.tapStartCountdown))
+        button.frame = CGRect(x: (view.frame.width / 2) - 115, y: view.frame.height * 0.6, width: 230, height: 50)
+        return button
     }
-
     
+    func showCameraView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.cameraCtrl?.frame = CGRect(x: self.centerWidth(width: 300), y: self.view.frame.height * 0.1, width: 300, height: 300)
+        })
+    }
     
+    func hideAvatarView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.avatarControl?.frame = CGRect(x: self.centerWidth(width: 300), y: -300, width: 300, height: 300)
+        }, completion: {_ in
+            self.avatarControl?.isHidden = true
+            self.avatarControl?.frame = CGRect(x: self.centerWidth(width: 300), y: self.view.frame.height * 0.1, width: 300, height: 300)
+        })
+    }
     
+    func tapStartCountdown() {
+        self.showCameraView()
+        UIView.animate(withDuration: 0.75, animations: {
+            self.countdownButton?.alpha = 0
+        }, completion: {_ in self.countdownCtrl?.startAnimation()})
+    }
+    
+    func runCompleted() {
+        self.cameraCtrl?.captureImage()
+        self.acceptCtrl?.showCtrl()
+    }
+    
+    func actionTaken(result: Bool) {
+        self.acceptCtrl?.hideCtrl()
+        if result {
+            let label = self.addStaticText(text: "Next Step", frame: CGRect(x: (view.frame.width / 2) - 150, y: (view.frame.height / 2) - 50, width: 300, height: 100))
+            self.view.addSubview(label)
+        } else {
+            self.cameraCtrl?.initializeCamera()
+            self.hideAvatarView()
+            view.addSubview(self.cameraCtrl!)
+            UIView.animate(withDuration: 0.75, animations: {
+                self.countdownButton?.alpha = 1
+            })
+        }
+    }
+    
+    func getImage(image: UIImage) {
+        self.avatarControl?.setImage(image: image)
+        self.avatarControl?.isHidden = false
+        self.cameraCtrl?.removeFromSuperview()
+        self.cameraCtrl?.frame = CGRect(x: centerWidth(width: 300), y: -300, width: 300, height: 300)
+    }
 }
 

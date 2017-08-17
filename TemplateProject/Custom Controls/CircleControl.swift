@@ -8,42 +8,38 @@
 
 import UIKit
 
-protocol CircleControlProtocol {
-    func resetCircle(pressed: Bool)
+protocol CircleDragged {
+    func reactToCircleDragged(point: CGPoint)
 }
 
-class CircleControl: UIView {
+class CircleControl : UIView {
+    var color: UIColor = UIColor.red
+    var myDelegate: CircleDragged?
     
-    var myDelegate: CircleControlProtocol?
-    var circlePath = UIBezierPath()
-    var color = UIColor.red
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        let myPanRecognizier = UIPanGestureRecognizer(target: self, action: #selector(CircleControl.pan))
+        self.addGestureRecognizer(myPanRecognizier)
+    }
     
-    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func draw(_ rect: CGRect) {
-        color.setFill()
-        circlePath = UIBezierPath(ovalIn: rect);
+        self.color.setFill()
+        let circlePath = UIBezierPath(ovalIn: rect);
         circlePath.fill()
     }
-
-    func UIColorFromRGB(_ rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
     
-    func changeColor(_ fingerPosition: UInt) {
-        color = UIColorFromRGB(fingerPosition)
-        setNeedsDisplay()
+    func pan(gestureRecognizier: UIPanGestureRecognizer) {
+        if gestureRecognizier.state == .began || gestureRecognizier.state == .changed {
+            let translation = gestureRecognizier.translation(in: superview)
+            let point = CGPoint(x: gestureRecognizier.view!.center.x + translation.x, y: gestureRecognizier.view!.center.y + translation.y)
+            gestureRecognizier.view!.center = point
+            gestureRecognizier.setTranslation(CGPoint.zero, in: superview)
+            self.myDelegate?.reactToCircleDragged(point: point)
+        }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        myDelegate?.resetCircle(pressed: true)
-    }
-    
-
     
 }

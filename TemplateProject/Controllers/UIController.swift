@@ -8,65 +8,68 @@
 
 import UIKit
 
-class UIController: UIViewController {
-    
-    var backgroundImageView: UIImageView!
-    var staticImage: UIImageView!
-    var startButton: UIButton!
+class UIController : UIViewController {
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = UIColor.blue
     }
     
     override func didReceiveMemoryWarning() {
-        
+        super.didReceiveMemoryWarning()
     }
     
-    func setBackgroundImage(_ imageName: String) {
-        let screenRect = UIScreen.main.bounds
-        let background = addStaticImage(imageName, xPos: screenRect.origin.x, yPos: screenRect.origin.y, width: view.frame.width, height: view.frame.height)
-        self.view.sendSubview(toBack: background)
-        
+    func centerWidth(width: CGFloat) -> CGFloat{
+        return (view.frame.width / 2) - (width / 2)
     }
     
-    func addStaticImage(_ imageName: String, xPos: CGFloat, yPos: CGFloat, width: CGFloat, height: CGFloat) -> UIImageView {
-        let imageSize = CGRect(x: xPos, y: yPos, width: width, height: height)
-        let staticImage = UIImage(named: imageName)
-        let imageView = UIImageView(image: staticImage)
-        
-        imageView.frame = imageSize
-        self.staticImage = imageView
-        self.view.addSubview(imageView)
-        
+    func centerHeight(height: CGFloat) -> CGFloat{
+        return (view.frame.height / 2) - (height / 2)
+    }
+    
+    func addBackgroundImage(image: String = "Background.png", detailImage: String = "Combined Shape-lg.png", imageFrame: CGRect, detailImageFrame: CGRect) {
+        view.addSubview(self.addStaticImage(image, frame: imageFrame))
+        view.addSubview(self.addStaticImage(detailImage, frame: detailImageFrame))
+    }
+    
+    func addBackgroundImage(image: String = "Background.png", detailImage: String = "Combined Shape-lg.png") {
+        view.addSubview(self.addStaticImage(image, x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        view.addSubview(self.addStaticImage(detailImage, x: 0, y: view.frame.height - 202, width: view.frame.width, height: 202))
+    }
+    
+    func addButton(title: String, image: String, _ action: Selector) -> UIButton {
+        let image = UIImage(named: image)
+        let button = addButton(action)
+        button.setBackgroundImage(image!, for: .normal)
+        button.setTitle(title, for: .normal)
+        return button
+    }
+    
+    func addButton(_ action: Selector) -> UIButton {
+        let button = UIButton()
+        button.addTarget(self, action: action, for: UIControlEvents.touchUpInside)
+        view.addSubview(button)
+        return button
+    }
+    
+    func addStaticText(text: String, frame: CGRect) -> UILabel {
+        let label = UILabel(frame: frame)
+        label.text = text
+        return label
+    }
+    
+    func addStaticImage(_ imageName: String, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> UIImageView {
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        imageView.frame = CGRect(x: x, y: y, width: width, height: height)
         return imageView
     }
     
-    func addButton(_ action: Selector, buttonImage: String, xPos: CGFloat, yPos: CGFloat, width: CGFloat, height: CGFloat) -> UIButton {
-        let buttonSize = CGRect(x: xPos, y: yPos, width: width, height: height)
-        let button = UIButton()
-        let buttonImage = UIImage(named: buttonImage)
-        
-        button.setImage(buttonImage, for: UIControlState.normal)
-        button.frame = buttonSize
-        button.addTarget(self, action: action, for: UIControlEvents.touchDown)
-        self.view.addSubview(button)
-        
-        return button
-        
+    func addStaticImage(_ imageName: String, frame: CGRect) -> UIImageView {
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        imageView.frame = frame
+        return imageView
     }
-    
-    func buttonTap() {
-        
-    }
-    
-    func createStaticText() {
-        
-    }
-    
-    func createStaticImage() {
-        
-    }
-    
-    
     
 }

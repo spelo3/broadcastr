@@ -18,10 +18,19 @@
 //  In this case, we're going to have a WelcomeScene, and we're going to model the different states
 //  in a model class.  We'll create an instances of this model in the WelcomeScene
 
-import UIKit
+import Foundation
 
-class WelcomeSceneState {
-
+//  When creating animation-heavy applications, managing the different 'states' can become unwieldly..
+//  We're not going to do full on Scene's here.  This is a personal preference for organizing a project
+//  Employers or coder's may have difference preferences
+//  Whenever we deviate from best practices or standards -- and there really aren't any official
+//  Project organization standards for iOS -- we want to make sure our reasoning is logical, and
+//  that an experienced developer could look at our project and notes and follow along.
+//  In this case, we're going to have a WelcomeScene, and we're going to model the different states
+//  in a model class.  We'll create an instances of this model in the WelcomeScene
+class WelcomeSceneState
+{
+    
     enum WelcomeClassState {
         case InitialState
         case AskingForPhoneNumber
@@ -30,7 +39,6 @@ class WelcomeSceneState {
     }
     
     var currentState: WelcomeClassState = .InitialState
-    var position = CGRect(x: 100, y: 300, width: 50, height: 50)
     
     init() {
         
@@ -46,7 +54,6 @@ class WelcomeSceneState {
     // Anyway, let's create a function that changes the current state.
     func changeState(state: WelcomeClassState)
     {
-        
         currentState = state;
     }
     
@@ -61,7 +68,7 @@ class WelcomeSceneState {
     // with.  One type is static positioning -- where we have elementX at CGRect(0, 0, 50, 50) at InitialState,
     // whereas elementX is at CGRect(50, 50, 50, 50) at AskingForPhoneNumber
     
-    // There are laos dynamic positioning.  An example of this is if you are using touch, and the elements 
+    // There are laos dynamic positioning.  An example of this is if you are using touch, and the elements
     // on the screen respond to the touch.  We'll cover this later, as there is a different approach
     // to handling this.  For now, our animations are going to be relatively simple
     
