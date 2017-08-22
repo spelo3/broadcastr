@@ -14,10 +14,11 @@ protocol CameraControlDelegate {
 }
 
 class CameraControl: UIView, AVCapturePhotoCaptureDelegate {
+    
+    var delegate: CameraControlDelegate?
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var cameraView: UIView?
-    var delegate: CameraControlDelegate?
     var imageResult: UIImage?
     var videoDeviceInput: AVCaptureDeviceInput?
     var captureDevice: AVCaptureDevice?
@@ -85,9 +86,8 @@ class CameraControl: UIView, AVCapturePhotoCaptureDelegate {
         borderLayer = frameLayer
     }
     
-    func captureImage(){
-        if let videoConnection = stillImageOutput?.connection(withMediaType:AVMediaTypeVideo)
-        {
+    func captureImage() {
+        if let videoConnection = stillImageOutput?.connection(withMediaType:AVMediaTypeVideo) {
             stillImageOutput?.captureStillImageAsynchronously(from: videoConnection, completionHandler: {
                 (sampleBuffer, error) in
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
@@ -105,8 +105,7 @@ class CameraControl: UIView, AVCapturePhotoCaptureDelegate {
         
         if imageHeight > imageWidth {
             imageHeight = imageWidth
-        }
-        else {
+        } else {
             imageWidth = imageHeight
         }
         

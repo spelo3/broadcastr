@@ -73,6 +73,7 @@
 		9B446EA61F300F7F00080CB9 /* LocationDetectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA51F300F7F00080CB9 /* LocationDetectorView.swift */; };
 		9B446EA81F32B40C00080CB9 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA71F32B40C00080CB9 /* MessageTableView.swift */; };
 		9B446EAA1F32B50100080CB9 /* ChatScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA91F32B50100080CB9 /* ChatScene.swift */; };
+		9B526BE01F4BCDFC00A8C938 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B526BDF1F4BCDFC00A8C938 /* SwiftyJSON.swift */; };
 		9B5887DE1F3BE98400464253 /* CountdownControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5887DD1F3BE98400464253 /* CountdownControl.swift */; };
 		9BF8F7B71F45273300CF7309 /* RegisterInputControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8F7B61F45273300CF7309 /* RegisterInputControl.swift */; };
 		9BF8F7B91F452CBF00CF7309 /* CommonScreenPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF8F7B81F452CBF00CF7309 /* CommonScreenPoints.swift */; };
@@ -150,6 +151,7 @@
 		9B446EA51F300F7F00080CB9 /* LocationDetectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetectorView.swift; sourceTree = "<group>"; };
 		9B446EA71F32B40C00080CB9 /* MessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
 		9B446EA91F32B50100080CB9 /* ChatScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScene.swift; sourceTree = "<group>"; };
+		9B526BDF1F4BCDFC00A8C938 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Controllers/SwiftyJSON.swift; sourceTree = "<group>"; };
 		9B5887DD1F3BE98400464253 /* CountdownControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownControl.swift; sourceTree = "<group>"; };
 		9BF8F7B61F45273300CF7309 /* RegisterInputControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInputControl.swift; sourceTree = "<group>"; };
 		9BF8F7B81F452CBF00CF7309 /* CommonScreenPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonScreenPoints.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		8EFAF1EC1F276E3500E07232 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				9B526BDF1F4BCDFC00A8C938 /* SwiftyJSON.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				8EFAF1E51F276D8D00E07232 /* NetworkController.swift in Sources */,
 				9B446EA61F300F7F00080CB9 /* LocationDetectorView.swift in Sources */,
 				9B1938BA1F3946E1002BD403 /* RegisterScene.swift in Sources */,
+				9B526BE01F4BCDFC00A8C938 /* SwiftyJSON.swift in Sources */,
 				9B3BD0E11F42833D00D1CF7C /* CameraControl.swift in Sources */,
 				8EFAF1D01F276CC600E07232 /* TemplateProject.xcdatamodeld in Sources */,
 				8EFAF1F71F276EEA00E07232 /* ChatRoomScene.swift in Sources */,

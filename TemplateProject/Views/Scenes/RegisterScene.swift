@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate, CameraControlDelegate {
+class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate, CameraControlDelegate, RegisterInputControlProtocol {
+    
     var countdownButton: UIButton? = nil
     var countdownImages: Array<String> = ["3.png", "2.png", "1.png"]
     var countdownCtrl: SuccessionOfImagesControl? = nil
@@ -75,8 +76,7 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
     func actionTaken(result: Bool) {
         self.acceptCtrl?.hideCtrl()
         if result {
-            let label = self.addStaticText(text: "Next Step", frame: CGRect(x: (view.frame.width / 2) - 150, y: (view.frame.height / 2) - 50, width: 300, height: 100))
-            self.view.addSubview(label)
+            addInputControl()
         } else {
             self.cameraCtrl?.initializeCamera()
             self.hideAvatarView()
@@ -92,6 +92,20 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
         self.avatarControl?.isHidden = false
         self.cameraCtrl?.removeFromSuperview()
         self.cameraCtrl?.frame = CGRect(x: centerWidth(width: 300), y: -300, width: 300, height: 300)
+    }
+    
+    func addInputControl() {
+        hideAvatarView()
+        
+        let myInputControl: RegisterInputControl = RegisterInputControl(frame: CGRect(x: 59, y: 100, width: view.frame.width - 100, height: 350), image: (avatarControl?.imageView.image)!)
+        myInputControl.delegate = self
+        view.addSubview(myInputControl)
+    }
+    
+    func registrationComplete(verificationCode: String) -> (phone: String, passcode: String) {
+        // Registration is complete
+        return (phone: "8587366808", passcode: "4567")
+
     }
 }
 
