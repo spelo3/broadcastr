@@ -35,5 +35,6 @@ class CircleAvatarControl: UIView {
     func setImage(image: UIImage) {
         imageView.image = image
         imageView.isHidden = false
+        print("setImage called")
     }
 }
