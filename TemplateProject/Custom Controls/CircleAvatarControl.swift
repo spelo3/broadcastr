@@ -9,6 +9,7 @@
 import UIKit
 
 class CircleAvatarControl: UIView {
+    
     let imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -35,6 +36,5 @@ class CircleAvatarControl: UIView {
     func setImage(image: UIImage) {
         imageView.image = image
         imageView.isHidden = false
-        print("setImage called")
     }
 }

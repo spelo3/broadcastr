@@ -16,6 +16,7 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
     var acceptCtrl: FancyBoolControl? = nil
     var cameraCtrl: CameraControl?
     var avatarControl: CircleAvatarControl?
+    var myInputControl: RegisterInputControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,15 +98,42 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
     func addInputControl() {
         hideAvatarView()
         
-        let myInputControl: RegisterInputControl = RegisterInputControl(frame: CGRect(x: 59, y: 100, width: view.frame.width - 100, height: 350), image: (avatarControl?.imageView.image)!)
+        myInputControl = RegisterInputControl(frame: CGRect(x: 59, y: 100, width: view.frame.width - 100, height: 350), image: (avatarControl?.imageView.image)!)
         myInputControl.delegate = self
         view.addSubview(myInputControl)
     }
     
-    func registrationComplete(verificationCode: String) -> (phone: String, passcode: String) {
+    func registrationComplete(user: User) {
         // Registration is complete
-        return (phone: "8587366808", passcode: "4567")
-
+        print("API Call here")
+        user.setVerificationCode(verificationCode: "12345")
+        myInputControl.setVerificationCode("12345")
+        registerUser(user: user)
     }
+    
+    func verificationCodesMatch() {
+        myInputControl.animateUp()
+    }
+    
+    override func registerUserResult(_ jsonStr: JSON) {
+
+        if jsonStr["Error"].int != nil {
+            print("we received a response")
+            let errorNumber = jsonStr["Error"].int
+            if errorNumber == 0 {
+                print("The user registered")
+            } else if errorNumber == 506 {
+                // The user has already registered
+                // From here we would navigate to login control
+                myInputControl.animateUp()
+            } else {
+                print(jsonStr["ErrorDetails"]["Error Description"])
+            }
+                
+        }
+    }
+
+
+
 }
 

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class NetworkController : UIController {
+class NetworkController : UIViewController {
     
-    var urlResource = "" // Network API URL Goes here
+    var urlResource = "http://broadcastr-app.herokuapp.com/api/users" // Network API URL Goes here
     
     var httpBody: String = ""
     var httpVerb: String = "POST";

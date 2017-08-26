@@ -9,8 +9,22 @@
 import UIKit
 
 protocol RegisterInputControlProtocol {
-    func registrationComplete(verificationCode: String) -> (phone: String, passcode: String)
+    func registrationComplete(user: User)
+    func verificationCodesMatch()
     
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
 }
 
 class RegisterInputControl: UIView, UITextFieldDelegate {
@@ -24,7 +38,21 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
     var lineView: UIImage!
     var originalFrame: CGRect?
     
-    var instructionsAr = ["What is your Phone Number?", "Choose a 4-Digit Passcode", "Enter the Verification Code"]
+    var user: User!
+    
+    private var verf_code: String!
+    
+    func setVerificationCode(_ verfCode: String) {
+        verf_code = verfCode
+    }
+    
+    func getVerificationCode() -> String {
+        return verf_code
+    }
+    
+    var instructionsAr = ["What Is Your Phone\nNumber?", "Choose Your\nPassword.", "Enter The Verification\nCode."]
+    
+    
     
     enum CurrentState {
         case phoneNumber
@@ -45,6 +73,11 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
         addSubview(selfieImageView)
         
         instructionsLabel = UILabel(frame: CGRect(x: 0, y: 100, width: 275, height: 80))
+        instructionsLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        instructionsLabel.textAlignment = NSTextAlignment.left
+        instructionsLabel.numberOfLines = 0
+        instructionsLabel.font = UIFont(name: "Avenir Next", size: 29.0)
+        instructionsLabel.textColor = UIColor.init(netHex: 0x51637D)
         instructionsLabel.text = instructionsAr[0]
         addSubview(instructionsLabel)
         
@@ -85,6 +118,7 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
                 animateInAndOut()
                 currentState = .passcode;
                 instructionsLabel.text = instructionsAr[1]
+                user = User(phoneNumber: textInput.text!)
                 textInput.text = "";
             }
             break;
@@ -96,6 +130,10 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
                 animateInAndOut()
                 currentState = .verification;
                 instructionsLabel.text = instructionsAr[2];
+                user.setPasscode(passcode: textInput.text!)
+                user.setVerificationCode(verificationCode: "12345")
+                print("Passcode has been entered")
+                delegate.registrationComplete(user: user)
                 textInput.text = "";
                 // Send a network request to get a verification code!!
             }
@@ -103,11 +141,18 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
             
         case .verification: textInput.text = formatAsVerificationCode(textInput.text! + digitPressed)
             
-            if(textInput.text!.characters.count == 5) {
-                animateInAndOut()
-                // Trigger the registration complete function
-                delegate.registrationComplete(verificationCode: "")
-                removeFromSuperview()
+            if (textInput.text!.characters.count == 5) {
+//                animateInAndOut()
+//                removeFromSuperview()
+//                Trigger the registration complete function
+                if (getVerificationCode() == textInput.text) {
+                    print("Verification correct - Communicate to VC")
+                    delegate.verificationCodesMatch()
+                    animateUp()
+                } else {
+                    print("All wrong, try again!")
+                }
+                textInput.text = ""
             }
             break;
         }
@@ -119,6 +164,7 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
     
     
     func animateInAndOut() {
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: .allowAnimatedContent, animations: {
             self.alpha = 0.0
             let frame = self.frame
@@ -131,6 +177,17 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
             self.alpha = 1.0
         }, completion: nil)
     }
+    
+    func animateUp() {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+            self.alpha = 0.0
+            self.originalFrame = self.frame
+            let frame = self.frame
+            self.frame = CGRect(x: frame.origin.x, y: 0 - frame.height, width: frame.width, height: frame.height)
+        })
+    }
+
     
     func formatAsPhone(_ formatString: String) -> String {
         let stringLength = formatString.characters.count
@@ -146,7 +203,6 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
         if(stringLength == 9) {
             return formatString + "-"
         }
-        
         return formatString
     }
     
@@ -162,11 +218,3 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
 }
 
 
-//    func animateUp() {
-//        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-//            self.alpha = 0.0
-//            self.originalFrame = self.frame
-//            let frame = self.frame
-//            self.frame = CGRect(x: frame.origin.x, y: 0 - frame.height, width: frame.width, height: frame.height)
-//        })
-//    }
