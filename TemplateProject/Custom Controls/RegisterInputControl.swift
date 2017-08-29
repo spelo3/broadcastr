@@ -9,6 +9,7 @@
 import UIKit
 
 protocol RegisterInputControlProtocol {
+    func loginComplete(user: User)
     func registrationComplete(user: User)
     func verificationCodesMatch()
     
@@ -30,13 +31,15 @@ extension UIColor {
 class RegisterInputControl: UIView, UITextFieldDelegate {
     
     var delegate: RegisterInputControlProtocol!
+    var avatarControl: CircleAvatarControl?
     
     var selfieImageView: UIImageView!
-    var selfieImage: UIImage!
     var instructionsLabel: UILabel!
     var textInput: UITextField!
     var lineView: UIImage!
     var originalFrame: CGRect?
+    
+    var bUseAsLogin = false
     
     var user: User!
     
@@ -55,6 +58,7 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
     
     
     enum CurrentState {
+        case login
         case phoneNumber
         case passcode
         case verification
@@ -66,10 +70,9 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
         super.init(frame: frame)
         // Do our initialization here
         
-        
-        selfieImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        selfieImage = image
-        selfieImageView.image = selfieImage
+        self.avatarControl = CircleAvatarControl(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        self.avatarControl?.setImage(image: image)
+        selfieImageView = avatarControl?.imageView
         addSubview(selfieImageView)
         
         instructionsLabel = UILabel(frame: CGRect(x: 0, y: 100, width: 275, height: 80))
@@ -112,50 +115,61 @@ class RegisterInputControl: UIView, UITextFieldDelegate {
         }
         
         switch(currentState) {
-        case .phoneNumber: textInput.text = formatAsPhone(textInput.text! + digitPressed)
-            
-            if(textInput.text?.characters.count == 14) {
-                animateInAndOut()
-                currentState = .passcode;
-                instructionsLabel.text = instructionsAr[1]
-                user = User(phoneNumber: textInput.text!)
-                textInput.text = "";
-            }
-            break;
-            
-        case .passcode: textInput.text = formatAsPasscode(textInput.text! + "*")
-            
-            if(textInput.text!.characters.count == 8) {
-                // We've got our passcode
-                animateInAndOut()
-                currentState = .verification;
-                instructionsLabel.text = instructionsAr[2];
-                user.setPasscode(passcode: textInput.text!)
-                user.setVerificationCode(verificationCode: "12345")
-                print("Passcode has been entered")
-                delegate.registrationComplete(user: user)
-                textInput.text = "";
-                // Send a network request to get a verification code!!
-            }
-            break;
-            
-        case .verification: textInput.text = formatAsVerificationCode(textInput.text! + digitPressed)
-            
-            if (textInput.text!.characters.count == 5) {
-//                animateInAndOut()
-//                removeFromSuperview()
-//                Trigger the registration complete function
-                if (getVerificationCode() == textInput.text) {
-                    print("Verification correct - Communicate to VC")
-                    delegate.verificationCodesMatch()
-                    animateUp()
-                } else {
-                    print("All wrong, try again!")
+        
+            case .phoneNumber: textInput.text = formatAsPhone(textInput.text! + digitPressed)
+                
+                if(textInput.text?.characters.count == 14) {
+                    animateInAndOut()
+                    currentState = .passcode;
+                    instructionsLabel.text = instructionsAr[1]
+                    user = User(phoneNumber: textInput.text!)
+                    textInput.text = "";
                 }
-                textInput.text = ""
-            }
-            break;
+                break;
+                
+            case .passcode: textInput.text = formatAsPasscode(textInput.text! + "*")
+                
+                if(textInput.text!.characters.count == 8) {
+                    // We've got our passcode
+                    animateInAndOut()
+                    currentState = .verification
+                    instructionsLabel.text = instructionsAr[2];
+                    user.setPasscode(passcode: textInput.text!)
+                    user.setVerificationCode(verificationCode: "12345")
+                    print("Passcode has been entered")
+                    textInput.text = "";
+                    // Send a network request to get a verification code!!
+                    
+                    if bUseAsLogin == true {
+                        currentState = .login
+                        animateUp()
+                        delegate.loginComplete(user: user)
+                    } else {
+                        delegate.registrationComplete(user: user)
+                    }
+                }
+                break;
+                
+            case .verification: textInput.text = formatAsVerificationCode(textInput.text! + digitPressed)
+                
+                if (textInput.text!.characters.count == 5) {
+    //                Trigger the registration complete function
+       
+                    if (getVerificationCode() == textInput.text) {
+                        print("Verification correct - Communicate to VC")
+                        delegate.verificationCodesMatch()
+                        animateUp()
+                    } else {
+                        print("All wrong, try again!")
+                    }
+                    textInput.text = ""
+                }
+                break;
+            
+        case .login:
+            break
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

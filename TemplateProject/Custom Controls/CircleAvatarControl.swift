@@ -19,7 +19,7 @@ class CircleAvatarControl: UIView {
         imageView.frame = self.bounds
         imageView.layer.cornerRadius = self.frame.width / 2
         imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 10.0
+        imageView.layer.borderWidth = 5.0
         imageView.layer.borderColor = UIColor.white.cgColor
         self.addSubview(imageView)
     }

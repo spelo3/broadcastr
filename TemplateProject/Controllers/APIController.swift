@@ -23,6 +23,19 @@ class APIController: NetworkController {
         print(jsonStr)
     }
     
+    func loginUser(user: User) {
+        httpVerb = "POST"
+        setResource("login")
+        addParameter("phone_num", value: user.getUser().phoneNumber as AnyObject)
+        addParameter("passcode", value: user.getUser().passcode as AnyObject)
+        networkRequest(loginUserResult)
+    }
+    
+    func loginUserResult(_ jsonStr: JSON) {
+        // This function intended to be overwritten
+        print(jsonStr)
+    }
+    
     
     
     

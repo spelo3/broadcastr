@@ -75,7 +75,7 @@ class CameraControl: UIView, AVCapturePhotoCaptureDelegate {
         
         let frameLayer = CAShapeLayer()
         frameLayer.path = path.cgPath
-        frameLayer.lineWidth = 20.0
+        frameLayer.lineWidth = 5.0
         frameLayer.strokeColor = UIColor.white.cgColor
         frameLayer.fillColor = nil
         

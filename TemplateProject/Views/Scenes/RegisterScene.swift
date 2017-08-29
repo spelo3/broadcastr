@@ -35,6 +35,7 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
         self.avatarControl = CircleAvatarControl(frame: CGRect(x: self.centerWidth(width: 300), y: self.view.frame.height * 0.1, width: 300, height: 300))
         self.avatarControl?.isHidden = true
         view.addSubview(self.avatarControl!)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,10 +98,35 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
     
     func addInputControl() {
         hideAvatarView()
-        
-        myInputControl = RegisterInputControl(frame: CGRect(x: 59, y: 100, width: view.frame.width - 100, height: 350), image: (avatarControl?.imageView.image)!)
+        let selfie = avatarControl?.imageView.image
+        avatarControl?.setImage(image: selfie!)
+        myInputControl = RegisterInputControl(frame: CGRect(x: 59, y: 100, width: view.frame.width - 100, height: 350), image: selfie!)
         myInputControl.delegate = self
         view.addSubview(myInputControl)
+    }
+    
+    func loginComplete(user: User) {
+        // Login is complete
+        print("Login API Call here")
+        loginUser(user: user)
+    }
+    
+    override func loginUserResult(_ jsonStr: JSON) {
+       
+        if jsonStr["Error"].int != nil {
+            print("we received a response")
+            let errorNumber = jsonStr["Error"].int
+            if errorNumber == 0 {
+                print("logged in")
+            } else if errorNumber == 506 {
+                // The user has already registered
+                // From here we would navigate to login control
+                myInputControl.animateUp()
+            } else {
+                print(jsonStr["ErrorDetails"]["Error Description"])
+            }
+            
+        }
     }
     
     func registrationComplete(user: User) {
@@ -109,10 +135,6 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
         user.setVerificationCode(verificationCode: "12345")
         myInputControl.setVerificationCode("12345")
         registerUser(user: user)
-    }
-    
-    func verificationCodesMatch() {
-        myInputControl.animateUp()
     }
     
     override func registerUserResult(_ jsonStr: JSON) {
@@ -131,6 +153,10 @@ class RegisterScene: UIController, SuccessionOfImagesDelagate, FancyBoolDelegate
             }
                 
         }
+    }
+    
+    func verificationCodesMatch() {
+        myInputControl.animateUp()
     }
 
 

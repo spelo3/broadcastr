@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class LoginScene: RegisterScene {
+    
+    override func viewDidLoad() {
+        addBackgroundImage()
+        addInputControl()
+        myInputControl.bUseAsLogin = true
+        
+    }
+    
+    override func registerUser(user: User) {
+        print("The user has been registered")
+    }
+    
+    
+    
+}
