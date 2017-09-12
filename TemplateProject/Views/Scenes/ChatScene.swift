@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ChatScene : UIController, MessageTableViewProtocol, CircleDragged {
-    var messagesTable: MessageTableView! = nil
+class ChatScene : UIController, FirstMessageTableViewProtocol, CircleDragged {
+    var messagesTable: FirstMessageTableView! = nil
     var names: [String] = ["Hermione", "Harry", "Ginny", "Ron"]
     var circle: CircleControl! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        messagesTable = MessageTableView(frame: CGRect(x: 0, y: 25, width: view.frame.width, height: view.frame.height - 400))
+        messagesTable = FirstMessageTableView(frame: CGRect(x: 0, y: 25, width: view.frame.width, height: view.frame.height - 400))
         view.addSubview(messagesTable)
         messagesTable.delegate = messagesTable
         messagesTable.dataSource = messagesTable

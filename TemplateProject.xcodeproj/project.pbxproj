@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		215294951F60D69C00568C8B /* MessagesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215294941F60D69C00568C8B /* MessagesTableView.swift */; };
+		215294971F60D7F600568C8B /* ChatRoomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215294961F60D7F600568C8B /* ChatRoomTextField.swift */; };
+		215294991F60DA4200568C8B /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215294981F60DA4200568C8B /* ChatRoom.swift */; };
+		217860B81F6794A8005683A1 /* ChatTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217860B71F6794A8005683A1 /* ChatTableCell.swift */; };
 		8EFAF1C81F276CC600E07232 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1C71F276CC600E07232 /* AppDelegate.swift */; };
 		8EFAF1D01F276CC600E07232 /* TemplateProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1CE1F276CC600E07232 /* TemplateProject.xcdatamodeld */; };
 		8EFAF1D21F276CC600E07232 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAF1D11F276CC600E07232 /* Assets.xcassets */; };
@@ -19,7 +23,6 @@
 		8EFAF1F11F276E9F00E07232 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1F01F276E9F00E07232 /* PushNotification.swift */; };
 		8EFAF1F31F276EB200E07232 /* LoginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1F21F276EB200E07232 /* LoginScene.swift */; };
 		8EFAF1F51F276EC800E07232 /* WelcomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1F41F276EC800E07232 /* WelcomeScene.swift */; };
-		8EFAF1F71F276EEA00E07232 /* ChatRoomScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1F61F276EEA00E07232 /* ChatRoomScene.swift */; };
 		8EFAF1F91F276EF600E07232 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1F81F276EF600E07232 /* Settings.swift */; };
 		8EFAF1FC1F27750A00E07232 /* WelcomeSceneState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF1FB1F27750A00E07232 /* WelcomeSceneState.swift */; };
 		8EFAF2021F29581800E07232 /* CircleControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFAF2011F29581800E07232 /* CircleControl.swift */; };
@@ -71,7 +74,7 @@
 		9B3BD0E11F42833D00D1CF7C /* CameraControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BD0E01F42833D00D1CF7C /* CameraControl.swift */; };
 		9B446EA21F300ED600080CB9 /* Face.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B446EA11F300ED600080CB9 /* Face.png */; };
 		9B446EA61F300F7F00080CB9 /* LocationDetectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA51F300F7F00080CB9 /* LocationDetectorView.swift */; };
-		9B446EA81F32B40C00080CB9 /* MessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA71F32B40C00080CB9 /* MessageTableView.swift */; };
+		9B446EA81F32B40C00080CB9 /* FirstMessageTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA71F32B40C00080CB9 /* FirstMessageTableView.swift */; };
 		9B446EAA1F32B50100080CB9 /* ChatScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B446EA91F32B50100080CB9 /* ChatScene.swift */; };
 		9B526BE01F4BCDFC00A8C938 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B526BDF1F4BCDFC00A8C938 /* SwiftyJSON.swift */; };
 		9B5887DE1F3BE98400464253 /* CountdownControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5887DD1F3BE98400464253 /* CountdownControl.swift */; };
@@ -83,6 +86,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		215294941F60D69C00568C8B /* MessagesTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagesTableView.swift; path = "../Custom Controls/MessagesTableView.swift"; sourceTree = "<group>"; };
+		215294961F60D7F600568C8B /* ChatRoomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoomTextField.swift; path = "../Custom Controls/ChatRoomTextField.swift"; sourceTree = "<group>"; };
+		215294981F60DA4200568C8B /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = Scenes/ChatRoom.swift; sourceTree = "<group>"; };
+		217860B71F6794A8005683A1 /* ChatTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTableCell.swift; path = ../Views/ChatTableCell.swift; sourceTree = "<group>"; };
 		8EFAF1C41F276CC600E07232 /* TemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EFAF1C71F276CC600E07232 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EFAF1CF1F276CC600E07232 /* TemplateProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TemplateProject.xcdatamodel; sourceTree = "<group>"; };
@@ -97,7 +104,6 @@
 		8EFAF1F01F276E9F00E07232 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		8EFAF1F21F276EB200E07232 /* LoginScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginScene.swift; sourceTree = "<group>"; };
 		8EFAF1F41F276EC800E07232 /* WelcomeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScene.swift; sourceTree = "<group>"; };
-		8EFAF1F61F276EEA00E07232 /* ChatRoomScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomScene.swift; sourceTree = "<group>"; };
 		8EFAF1F81F276EF600E07232 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8EFAF1FB1F27750A00E07232 /* WelcomeSceneState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeSceneState.swift; sourceTree = "<group>"; };
 		8EFAF2011F29581800E07232 /* CircleControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleControl.swift; sourceTree = "<group>"; };
@@ -149,7 +155,7 @@
 		9B3BD0E01F42833D00D1CF7C /* CameraControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraControl.swift; sourceTree = "<group>"; };
 		9B446EA11F300ED600080CB9 /* Face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Face.png; sourceTree = "<group>"; };
 		9B446EA51F300F7F00080CB9 /* LocationDetectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetectorView.swift; sourceTree = "<group>"; };
-		9B446EA71F32B40C00080CB9 /* MessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableView.swift; sourceTree = "<group>"; };
+		9B446EA71F32B40C00080CB9 /* FirstMessageTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstMessageTableView.swift; path = "../Custom Controls/FirstMessageTableView.swift"; sourceTree = "<group>"; };
 		9B446EA91F32B50100080CB9 /* ChatScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScene.swift; sourceTree = "<group>"; };
 		9B526BDF1F4BCDFC00A8C938 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../Controllers/SwiftyJSON.swift; sourceTree = "<group>"; };
 		9B5887DD1F3BE98400464253 /* CountdownControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownControl.swift; sourceTree = "<group>"; };
@@ -171,6 +177,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		217860B91F67B75D005683A1 /* UnusedViews */ = {
+			isa = PBXGroup;
+			children = (
+				9B446EA71F32B40C00080CB9 /* FirstMessageTableView.swift */,
+				9B446EA51F300F7F00080CB9 /* LocationDetectorView.swift */,
+			);
+			name = UnusedViews;
+			sourceTree = "<group>";
+		};
+		217860BA1F67B7B0005683A1 /* UnusedModels */ = {
+			isa = PBXGroup;
+			children = (
+				9BF8F7B81F452CBF00CF7309 /* CommonScreenPoints.swift */,
+				8EFAF1F01F276E9F00E07232 /* PushNotification.swift */,
+			);
+			name = UnusedModels;
+			sourceTree = "<group>";
+		};
 		8EFAF1BB1F276CC600E07232 = {
 			isa = PBXGroup;
 			children = (
@@ -208,9 +232,9 @@
 		8EFAF1DC1F276D0500E07232 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8EFAF1E41F276D8D00E07232 /* NetworkController.swift */,
 				8EFAF1E61F276D9A00E07232 /* APIController.swift */,
 				8EFAF1E81F276DF600E07232 /* JSONRequestController.swift */,
+				8EFAF1E41F276D8D00E07232 /* NetworkController.swift */,
 				8EFAF1EA1F276E1100E07232 /* UIController.swift */,
 			);
 			path = Controllers;
@@ -219,13 +243,12 @@
 		8EFAF1DD1F276D0500E07232 /* Custom Controls */ = {
 			isa = PBXGroup;
 			children = (
-				8EFAF2011F29581800E07232 /* CircleControl.swift */,
-				9B446EA71F32B40C00080CB9 /* MessageTableView.swift */,
-				9B5887DD1F3BE98400464253 /* CountdownControl.swift */,
-				9B3BD0E01F42833D00D1CF7C /* CameraControl.swift */,
 				9BF8F7B61F45273300CF7309 /* RegisterInputControl.swift */,
-				9BF8F7BA1F452D7600CF7309 /* FancyBoolControl.swift */,
+				9B3BD0E01F42833D00D1CF7C /* CameraControl.swift */,
+				8EFAF2011F29581800E07232 /* CircleControl.swift */,
 				9BF8F7BC1F452DC200CF7309 /* CircleAvatarControl.swift */,
+				9B5887DD1F3BE98400464253 /* CountdownControl.swift */,
+				9BF8F7BA1F452D7600CF7309 /* FancyBoolControl.swift */,
 				9BF8F7BE1F452E0000CF7309 /* SuccessionOfImagesControl.swift */,
 			);
 			path = "Custom Controls";
@@ -234,10 +257,10 @@
 		8EFAF1DE1F276D0500E07232 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8EFAF1FA1F2774EC00E07232 /* SceneStates */,
+				217860B71F6794A8005683A1 /* ChatTableCell.swift */,
 				8EFAF1EE1F276E6A00E07232 /* User.swift */,
-				8EFAF1F01F276E9F00E07232 /* PushNotification.swift */,
-				9BF8F7B81F452CBF00CF7309 /* CommonScreenPoints.swift */,
+				217860BA1F67B7B0005683A1 /* UnusedModels */,
+				8EFAF1FA1F2774EC00E07232 /* SceneStates */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -246,8 +269,11 @@
 			isa = PBXGroup;
 			children = (
 				8EFAF1ED1F276E5700E07232 /* Scenes */,
+				215294981F60DA4200568C8B /* ChatRoom.swift */,
+				215294941F60D69C00568C8B /* MessagesTableView.swift */,
+				215294961F60D7F600568C8B /* ChatRoomTextField.swift */,
 				8EFAF1F81F276EF600E07232 /* Settings.swift */,
-				9B446EA51F300F7F00080CB9 /* LocationDetectorView.swift */,
+				217860B91F67B75D005683A1 /* UnusedViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,11 +365,10 @@
 		8EFAF1ED1F276E5700E07232 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				8EFAF1F21F276EB200E07232 /* LoginScene.swift */,
-				8EFAF1F41F276EC800E07232 /* WelcomeScene.swift */,
-				8EFAF1F61F276EEA00E07232 /* ChatRoomScene.swift */,
 				9B446EA91F32B50100080CB9 /* ChatScene.swift */,
+				8EFAF1F21F276EB200E07232 /* LoginScene.swift */,
 				9B1938B91F3946E1002BD403 /* RegisterScene.swift */,
+				8EFAF1F41F276EC800E07232 /* WelcomeScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -478,21 +503,24 @@
 				9BF8F7B91F452CBF00CF7309 /* CommonScreenPoints.swift in Sources */,
 				8EFAF1EB1F276E1100E07232 /* UIController.swift in Sources */,
 				9BF8F7BB1F452D7600CF7309 /* FancyBoolControl.swift in Sources */,
+				215294951F60D69C00568C8B /* MessagesTableView.swift in Sources */,
 				8EFAF1F91F276EF600E07232 /* Settings.swift in Sources */,
 				9BF8F7B71F45273300CF7309 /* RegisterInputControl.swift in Sources */,
 				9BF8F7BD1F452DC200CF7309 /* CircleAvatarControl.swift in Sources */,
+				217860B81F6794A8005683A1 /* ChatTableCell.swift in Sources */,
 				8EFAF1E51F276D8D00E07232 /* NetworkController.swift in Sources */,
 				9B446EA61F300F7F00080CB9 /* LocationDetectorView.swift in Sources */,
 				9B1938BA1F3946E1002BD403 /* RegisterScene.swift in Sources */,
 				9B526BE01F4BCDFC00A8C938 /* SwiftyJSON.swift in Sources */,
 				9B3BD0E11F42833D00D1CF7C /* CameraControl.swift in Sources */,
 				8EFAF1D01F276CC600E07232 /* TemplateProject.xcdatamodeld in Sources */,
-				8EFAF1F71F276EEA00E07232 /* ChatRoomScene.swift in Sources */,
 				8EFAF1F31F276EB200E07232 /* LoginScene.swift in Sources */,
 				8EFAF1EF1F276E6A00E07232 /* User.swift in Sources */,
-				9B446EA81F32B40C00080CB9 /* MessageTableView.swift in Sources */,
+				9B446EA81F32B40C00080CB9 /* FirstMessageTableView.swift in Sources */,
+				215294991F60DA4200568C8B /* ChatRoom.swift in Sources */,
 				8EFAF1FC1F27750A00E07232 /* WelcomeSceneState.swift in Sources */,
 				8EFAF1E91F276DF600E07232 /* JSONRequestController.swift in Sources */,
+				215294971F60D7F600568C8B /* ChatRoomTextField.swift in Sources */,
 				8EFAF1F11F276E9F00E07232 /* PushNotification.swift in Sources */,
 				8EFAF2021F29581800E07232 /* CircleControl.swift in Sources */,
 				8EFAF1C81F276CC600E07232 /* AppDelegate.swift in Sources */,

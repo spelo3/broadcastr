@@ -1,5 +1,5 @@
 //
-//  MessageTableView.swift
+//  FirstMessageTableView.swift
 //  TemplateProject
 //
 //  Created by Scott Pelo on 8/2/17.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol MessageTableViewProtocol {
+protocol FirstMessageTableViewProtocol {
     func userSelectedHarryPotterCharacter(characterName: String, cell: UITableViewCell)
 }
 
-class MessageTableView : UITableView, UITableViewDelegate, UITableViewDataSource {
+class FirstMessageTableView : UITableView, UITableViewDelegate, UITableViewDataSource {
     var strings: [String] = ["default"]
-    var myDelegate: MessageTableViewProtocol?
+    var myDelegate: FirstMessageTableViewProtocol?
     
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         self.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MessageTableView.tapName))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FirstMessageTableView.tapName))
         self.addGestureRecognizer(tapGesture)
     }
     
